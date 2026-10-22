@@ -1,77 +1,121 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-design-slug="replace-slug" data-design-parent="none" data-design-status="design" data-design-depth="prompt">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>&lt;Project&gt; — design</title>
-<style>
-:root{
---a:#047857;--a-bg:#ecfdf5;
---b:#c2185b;--b-bg:#fce4ec;
---c:#2e7d32;--c-bg:#c8e6c9;
---ext:#6b7280;--ext-bg:#f3f4f6;
---flag:#b45309;--flag-bg:#fef3c7;
---text:#1f2937;--muted:#6b7280;--rule:#e5e7eb;--accent:#2563eb;--code-bg:#f3f4f6;--page:#fff;
---done:#047857;--done-bg:#ecfdf5}
-*{box-sizing:border-box}
-body{margin:0;padding:2rem 1.25rem 6rem;color:var(--text);background:var(--page);line-height:1.6;
-font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
-main{max-width:1100px;margin:0 auto}
-h1{margin:0 0 .25rem;font-size:1.9rem;line-height:1.2}
-h2{margin-top:2.5rem;font-size:1.25rem}
-h3{margin:1.5rem 0 .5rem;font-size:1.05rem}
-p{margin:1rem 0}
-a{color:var(--accent)}
-code{background:var(--code-bg);padding:2px 5px;border-radius:3px;font-size:.9em;
-font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-.subtitle{color:var(--muted);margin:0 0 1.5rem;font-size:1.05rem}
-.diagram{margin:1.5rem 0;overflow-x:auto}
-.diagram svg{display:block;max-width:100%;height:auto}
-table{width:100%;border-collapse:collapse;margin:1.5rem 0;display:block;overflow-x:auto}
-th,td{text-align:left;padding:.5rem .75rem;border-bottom:1px solid var(--rule);vertical-align:top}
-th{font-weight:600}
-td code{white-space:nowrap}
-.stack th:first-child,.stack td:first-child{white-space:nowrap}
-pre{background:#f9fafb;border:1px solid var(--rule);border-radius:6px;padding:.9rem 1rem;
-overflow-x:auto;font-size:.85em;line-height:1.65}
-pre code{background:none;padding:0}
-pre.mermaid{background:var(--page);text-align:center}
-blockquote{margin:1rem 0;padding:.6rem 1rem;border-left:3px solid var(--rule);color:var(--muted)}
-ul{margin:.5rem 0;padding-left:1.35rem;list-style:none}
-li{margin:.3rem 0}
-li.plain{list-style:disc}
-.box{display:inline-block;width:1.05rem;height:1.05rem;margin-right:.5rem;border:1px solid #9ca3af;
-border-radius:3px;text-align:center;line-height:1rem;font-size:.8rem;vertical-align:-2px}
-.box.on{background:var(--done-bg);border-color:var(--done);color:var(--done)}
-li.done{color:var(--muted)}
-.arrow{color:var(--accent);font-weight:600}
-.ok{color:var(--c);font-weight:600}
-.part{color:var(--flag);font-weight:600}
-.bad{color:#b91c1c;font-weight:600}
-.off{color:var(--muted)}
-.src{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
-.research-rule{margin:75vh 0 0;border:0;border-top:2px solid #d1d5db}
-h2.research{color:var(--muted);font-size:1.05rem}
-.research-area{font-size:.925rem}
-.research-area h3{font-size:.95rem;margin-top:1.5rem}
-.generated{max-width:1100px;margin:0 auto 1.5rem;padding:.5rem .75rem;border:1px dashed var(--rule);
-border-radius:4px;color:var(--muted);font-size:.82rem}
-@media(prefers-color-scheme:dark){
-:root{--text:#e5e7eb;--muted:#9ca3af;--rule:#374151;--accent:#93c5fd;--code-bg:#1f2937;--page:#111827;
---c:#6ee7b7;--done:#6ee7b7;--done-bg:#064e3b;--flag:#fcd34d;--ext:#9ca3af}
-pre{background:#1f2937}
-.research-rule{border-top-color:#4b5563}
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feature name — design</title>
+  <style>
+    /* Semantic palette. Rename these to the actors in YOUR diagram — the names are
+       what keep raw hex out of the SVG and state each colour's meaning once.
+       This template commits to a single light look on purpose (matches the other
+       pages in docs/); every colour is painted explicitly so it holds anywhere. */
+    :root {
+      --a:#047857;   --a-bg:#ecfdf5;   /* first-party host processes */
+      --b:#c2185b;   --b-bg:#fce4ec;   /* the sandboxed / untrusted side */
+      --c:#2e7d32;   --c-bg:#c8e6c9;   /* the new component this page is about */
+      --ext:#6b7280; --ext-bg:#f3f4f6; /* off-node, external, or legacy */
+      --flag:#b45309; --flag-bg:#fef3c7; /* feature flags / gates */
+      --text:#1f2937; --muted:#6b7280;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 1100px; margin: 0 auto; padding: 2rem;
+      color: var(--text); background: #fff; line-height: 1.6;
+    }
+    h1 { margin-bottom: 0.25rem; }
+    h2 { margin-top: 2.5rem; font-size: 1.25rem; }
+    .subtitle { color: var(--muted); margin-bottom: 1.5rem; }
+    p { margin: 1rem 0; }
+    a { color: #2563eb; }
+    code { background: #f3f4f6; padding: 2px 5px; border-radius: 3px; font-size: 0.9em; }
+
+    /* Wide content scrolls in its own box; the page body never scrolls sideways. */
+    .diagram { margin: 1.5rem 0; overflow-x: auto; }
+    .diagram svg { display: block; max-width: 100%; height: auto; }
+
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid #e5e7eb; }
+    th { font-weight: 600; }
+    td code { white-space: nowrap; }
+    /* Work-breakdown / PR table: keep the short first column (1, GS-1, repo#123) on one line.
+       Scoped by class so the research tables' long first column (Claim / Question) still wraps. */
+    .stack th:first-child, .stack td:first-child { white-space: nowrap; }
+
+
+    pre {
+      background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;
+      padding: 0.9rem 1rem; overflow-x: auto; font-size: 0.85em; line-height: 1.65;
+    }
+    pre code { background: none; padding: 0; }
+    .cmt { color: var(--muted); }
+    .flg { color: var(--flag); font-weight: 600; }
+
+    /* Deliberately no callout/admonition classes: if a point matters it goes in a topic
+       sentence, and status belongs in the PR table's status column. See SKILL.md Step 3. */
+
+    /* Verdict spans for status columns in tables. */
+    .ok   { color: var(--c);  font-weight: 600; }
+    .part { color: #b45309;   font-weight: 600; }
+    .bad  { color: #b91c1c;   font-weight: 600; }
+    .off  { color: var(--muted); }
+
+    .src { font-size: 0.8rem; color: var(--muted); margin: 0.35rem 0 0; }
+
+    /* The line between the human summary and the working notes. */
+    /* A near-full-screen gap before the rule: the human page should end, and feel ended,
+       before the agent-facing notes begin. */
+    .research-rule { margin: 75vh 0 0; border: 0; border-top: 2px solid #d1d5db; }
+    h2.research { color: var(--muted); font-size: 1.05rem; }
+    .research-area { font-size: 0.925rem; }
+    .research-area h3 { font-size: 0.95rem; margin-top: 1.5rem; }
+    .table-scroll { max-width: 100%; overflow-x: auto; }
+  body { box-sizing: border-box; }
 </style>
 </head>
 <body>
-<div class="generated">GENERATED from <code>template.md</code> — edit that, not this.</div>
-<main><h1>&lt;Project&gt; — design</h1><p><strong>Status:</strong> design · <strong>Depth:</strong> prompt · <strong>Updated:</strong> &lt;YYYY-MM-DD&gt; · <strong>Task:</strong> &lt;native:… or #slug&gt; <strong>Slug:</strong> &lt;this-doc-slug&gt; · <strong>Parent:</strong> &lt;parent-slug#row-id, or <code>none</code>&gt; · <strong>Forked from:</strong> &lt;slug, if any&gt;</p><p class="subtitle">One sentence: what changes, and for whom.</p><h2>How it works</h2><pre class="mermaid">flowchart LR
-  A[where work starts] --&gt; B[what decides]
-  B --&gt; C[what it changes]</pre><h2>Breakdown</h2><h3>&lt;First group — delete the <code>###</code> headings while the list is short&gt;</h3><ul><li class="open"><span class="box off"></span>&lt;a1&gt; First slice — <code>path/to/file.ts#theFunctionItChanges</code> — acceptance: &lt;what proves it, observably&gt;</li><ul><li class="open"><span class="box off"></span>&lt;a2&gt; A sub-task, if the slice has parts</li></ul><li class="open"><span class="box off"></span>&lt;b1&gt; Second slice — after: #a1 — <code>path/to/other.ts#TheTypeItAdds</code> — acceptance: &lt;…&gt;</li><li class="open"><span class="box off"></span>&lt;c1&gt; Open the PR and merge it — gate:human — after: #b1 — acceptance: the ref in the table below resolves to a merged PR</li><li class="open"><span class="box off"></span>&lt;d1&gt; Too big for one PR — gate:design — <span class="arrow">→</span> <code>docs/&lt;child-slug&gt;/index.md</code></li></ul><h2>Pull requests</h2><table class="stack"><thead><tr><th>PR</th><th>Change</th><th>Status</th></tr></thead><tbody></tbody></table><table><thead><tr><th>Commit</th><th>Change</th></tr></thead><tbody></tbody></table><hr class="research-rule"><div class="research-area"><h2 class="research">Research notes</h2><h3>Decisions, and what was rejected</h3><table><thead><tr><th>Decision</th><th>Why</th><th>Rejected, and why</th></tr></thead><tbody></tbody></table><h3>Verified claims</h3><table><thead><tr><th>Claim</th><th>Evidence</th><th>Status</th></tr></thead><tbody></tbody></table><h3>Could not verify</h3><h3>Commands that produced the evidence</h3><pre><code>grep -rn &quot;&lt;the thing&gt;&quot; --include='*.ts' server scripts src</code></pre><h3>Build tasks — loopable backlog</h3><p class="src">Atomic, self-contained tasks — one PR each, in dependency order. A loop takes the next task whose dependencies are met. The gate rides the end of the change cell: <code>· gate: human</code> is never loop-run, and <code>· gate: design</code> is a child project that writes its own document rather than a task. Generated from the Breakdown above.</p><table><thead><tr><th>Task</th><th>Change · gate</th><th>Anchors (file#symbol or file:line)</th><th>Acceptance check</th><th>Depends</th></tr></thead><tbody><tr><td><strong>a1</strong> First slice</td><td>First slice · gate: auto</td><td><code>path/to/file.ts#theFunctionItChanges</code></td><td>&lt;what proves it, observably&gt;</td><td>—</td></tr><tr><td><strong>a2</strong> A sub-task, if the slice has parts</td><td>A sub-task, if the slice has parts · gate: auto</td><td></td><td></td><td>—</td></tr><tr><td><strong>b1</strong> Second slice</td><td>Second slice · gate: auto</td><td><code>path/to/other.ts#TheTypeItAdds</code></td><td>&lt;…&gt;</td><td>a1</td></tr><tr><td><strong>c1</strong> Open the PR and merge it</td><td>Open the PR and merge it · gate: human</td><td></td><td>the ref in the table</td><td>b1</td></tr><tr><td><strong>d1</strong> Too big for one PR</td><td>Too big for one PR · gate: design</td><td><code>docs/&lt;child-slug&gt;/index.md</code></td><td></td><td>—</td></tr></tbody></table></div></main>
-<script type="module">
-import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs'
-mermaid.initialize({startOnLoad:true,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'default'})
-</script>
+  <h1>Feature name</h1>
+  <p class="subtitle">This feature serves its users with a clearly stated outcome.</p>
+  <h2>The work this project will deliver</h2>
+  <div class="diagram">
+    <svg viewBox="0 0 620 110" role="img" aria-label="The goal informs the authored design, which guides implementation.">
+      <defs><marker id="seed-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--ext)"/></marker></defs>
+      <rect x="16" y="20" width="160" height="70" rx="8" fill="var(--ext-bg)" stroke="var(--ext)" stroke-width="1.3"/>
+      <text x="96" y="60" text-anchor="middle" font-size="14" fill="var(--text)">Project goal</text>
+      <rect x="230" y="20" width="160" height="70" rx="8" fill="var(--c-bg)" stroke="var(--c)" stroke-width="2"/>
+      <text x="310" y="60" text-anchor="middle" font-size="14" fill="var(--text)">Authored design</text>
+      <rect x="444" y="20" width="160" height="70" rx="8" fill="var(--a-bg)" stroke="var(--a)" stroke-width="1.3"/>
+      <text x="524" y="60" text-anchor="middle" font-size="14" fill="var(--text)">Implementation</text>
+      <path d="M176,55 H228" fill="none" stroke="var(--ext)" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#seed-arrow)"/>
+      <path d="M390,55 H442" fill="none" stroke="var(--ext)" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#seed-arrow)"/>
+      <text x="202" y="44" text-anchor="middle" font-size="8" fill="var(--muted)">planned</text>
+      <text x="417" y="44" text-anchor="middle" font-size="8" fill="var(--muted)">planned</text>
+    </svg>
+  </div>
+  <p>The project goal is the starting point for this design. Replace this skeleton with verified mechanisms and the decisions they support before implementation.</p>
+  <p>The backlog records the work and its acceptance checks. Add exact anchors and dependencies to each row before starting it.</p>
+  <div class="table-scroll"><table class="stack" aria-label="Work breakdown">
+    <thead><tr><th>Work</th><th>Change</th></tr></thead>
+    <tbody><tr><td><a href="#T1">T1</a></td><td>First change</td></tr></tbody>
+  </table></div>
+  <hr class="research-rule">
+  <h2 class="research">Research notes</h2>
+  <div class="research-area">
+    <h3>Verified claims</h3>
+    <p>The project goal above is supplied at creation. Implementation details have not been verified.</p>
+    <h3>Options considered and rejected</h3>
+    <p>Record alternatives and the evidence for the decision here.</p>
+    <h3>Build tasks</h3>
+    <!-- Keep this ONE canonical five-column backlog. data-bid is durable: preserve it when
+         renaming or moving a row. Mark completed work with · landed in the Change cell.
+         Gates are · auto, · human or · design. Depends names row ids, separated by commas.
+         A child remains at docs/<child>/index.html; data-design-parent="slug#row" owns nesting.
+         Maintain this HTML directly using the dev1 design-page skill; never regenerate it from Markdown. -->
+    <div class="table-scroll"><table class="stack">
+      <thead><tr><th>Task</th><th>Change · gate</th><th>Anchors (file#symbol or file:line)</th><th>Acceptance check</th><th>Depends</th></tr></thead>
+      <tbody>
+<tr id="T1" data-bid="replace-slug-t1"><td><strong>T1</strong> First change</td><td>Describe the change · auto</td><td><code>new src/feature.ts</code></td><td>Specify an executable acceptance check.</td><td>—</td></tr>
+      </tbody>
+    </table></div>
+  </div>
 </body>
 </html>
